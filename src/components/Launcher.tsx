@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Launcher({ onLaunch }) {
+type LauncherProps = {
+    onLaunch: (app: string) => void;
+};
+
+export default function Launcher({ onLaunch }: LauncherProps) {
     return (
         <div className="launcher">
             <button onClick={() => onLaunch("terminal")}>Terminal</button>
