@@ -1,0 +1,10 @@
+{
+    "name": "FutureOS",
+    "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20",
+    "postCreateCommand": "npm install",
+    "customizations": {
+        "vscode": {
+            "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
+        }
+    }
+}
