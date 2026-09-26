@@ -21,11 +21,22 @@ jobs:
           check-latest: true
 
       - run: npm install
-      - run: npm run build --verbose || true
-      - run: echo "=== BUILD LOGS ==="
-      - run: cat dist/index.html || echo "dist folder not created"
-      - run: echo "=== FILE TREE ==="
-      - run: ls -R .
+
+      - name: Build with verbose logging
+        run: |
+          npm run build --verbose
+        continue-on-error: true
+
+      - name: Show dist folder
+        run: |
+          echo "=== dist folder ==="
+          ls -R dist || echo "dist does not exist"
+
+      - name: Show full workspace
+        run: |
+          echo "=== workspace ==="
+          ls -R .
+
 
 
       - uses: actions/upload-pages-artifact@v3
