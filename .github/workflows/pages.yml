@@ -21,11 +21,11 @@ jobs:
           check-latest: true
 
       - run: npm install
-      - run: npm install
-      - run: npm run build --verbose
-      - run: ls -R .
+      - run: npm run build --verbose || true
+      - run: echo "=== BUILD LOGS ==="
       - run: cat dist/index.html || echo "dist folder not created"
-      - run: cat vite.config.js
+      - run: echo "=== FILE TREE ==="
+      - run: ls -R .
 
 
       - uses: actions/upload-pages-artifact@v3
