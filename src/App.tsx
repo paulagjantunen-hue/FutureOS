@@ -1,28 +1,30 @@
-import React, { useState } from "react";
-import SystemBar from "./components/SystemBar";
-import Launcher from "./components/Launcher";
-import AppWindow from "./components/AppWindow";
-import Terminal from "./apps/Terminal";
+import WindowManager from "./components/WindowManager";
 import Notes from "./apps/Notes";
+import Terminal from "./apps/Terminal";
 
 export default function App() {
-    const [openApp, setOpenApp] = useState<string | null>(null);
+    const windows = [
+        {
+            id: "notes",
+            title: "Notes",
+            content: <Notes />,
+            x: 80,
+            y: 80,
+            width: 300,
+            height: 300,
+            z: 1
+        },
+        {
+            id: "terminal",
+            title: "Terminal",
+            content: <Terminal />,
+            x: 420,
+            y: 120,
+            width: 400,
+            height: 300,
+            z: 2
+        }
+    ];
 
-    const apps: Record<string, JSX.Element> = {
-        terminal: <Terminal />,
-        notes: <Notes />
-    };
-
-    return (
-        <div className="future-os">
-            <SystemBar />
-            <Launcher onLaunch={setOpenApp} />
-
-            {openApp && (
-                <AppWindow title={openApp} onClose={() => setOpenApp(null)}>
-                    {apps[openApp]}
-                </AppWindow>
-            )}
-        </div>
-    );
+    return <WindowManager windows={windows} />;
 }
