@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 
+import { executeCommand } from "../filesystem/commands";
+
 export default function Terminal() {
     const [history, setHistory] = useState<string[]>([]);
     const [input, setInput] = useState("");
 
     const run = () => {
-        setHistory([...history, "> " + input]);
+        const result = executeCommand(input);
+
+        setHistory(prev => [
+            ...prev,
+            "> " + input,
+            result
+        ]);
+
         setInput("");
     };
 
